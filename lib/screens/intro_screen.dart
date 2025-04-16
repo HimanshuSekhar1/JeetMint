@@ -12,6 +12,7 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   final PageController _controller = PageController();
   int _currentIndex = 0;
+  Timer? _timer;
 
   final List<Map<String, String>> introData = [
     {
@@ -23,30 +24,37 @@ class _IntroScreenState extends State<IntroScreen> {
       "text": "Compete live with players across India!"
     },
     {
-      "image": "assets/images/slide3.jpg",
+      "image": "assets/images/FrontLogo.png",
       "text": "Jeeto cash daily on JeetMint!"
     },
   ];
 
-  Timer? autoSlideTimer;
-
   @override
   void initState() {
     super.initState();
-    autoSlideTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      if (_currentIndex < introData.length - 1) {
-        _controller.nextPage(
-            duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-      } else {
-        timer.cancel();
+    _startAutoSlide();
+  }
+
+  void _startAutoSlide() {
+    _timer?.cancel(); // Clear any existing timer
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_controller.hasClients) {
+        if (_currentIndex < introData.length - 1) {
+          _controller.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
+        } else {
+          _timer?.cancel(); // Stop auto-slide at the last slide
+        }
       }
     });
   }
 
   @override
   void dispose() {
+    _timer?.cancel(); // Cleanup timer when screen is disposed
     _controller.dispose();
-    autoSlideTimer?.cancel();
     super.dispose();
   }
 
@@ -64,6 +72,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 setState(() {
                   _currentIndex = index;
                 });
+                _startAutoSlide(); // Restart auto-slide on manual swipe
               },
               itemBuilder: (context, index) {
                 return Column(
@@ -76,8 +85,7 @@ class _IntroScreenState extends State<IntroScreen> {
                     const SizedBox(height: 40),
                     Text(
                       introData[index]['text']!,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     )
                   ],
@@ -89,6 +97,7 @@ class _IntroScreenState extends State<IntroScreen> {
               bottom: 30,
               child: TextButton(
                 onPressed: () {
+                  _timer?.cancel(); // Stop auto-slide when skipping
                   Get.offNamed('/login');
                 },
                 child: const Text(

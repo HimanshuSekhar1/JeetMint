@@ -44,7 +44,8 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const Text("Don't have an account? "),
                   InkWell(
-                    onTap: () => Get.printInfo(info: 'Navigating to signup'),
+                    onTap: () {Get.toNamed('/signup');},
+                    // onTap: () => Get.printInfo(info: 'Navigating to signup'),
                     child: const Text(
                       "Sign up",
                       style: TextStyle(color: Colors.blue),

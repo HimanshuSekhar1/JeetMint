@@ -5,7 +5,7 @@ import 'screens/splash_screen.dart';
 import 'screens/intro_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/phone_login_screen.dart';
-
+import 'screens/signup_screen.dart';
 void main() {
   runApp(const JeetMintApp());
 }
@@ -23,6 +23,7 @@ class JeetMintApp extends StatelessWidget {
         GetPage(name: '/intro', page: () => const IntroScreen()),
         GetPage(name: '/login', page: () => const LoginScreen()),
         GetPage(name: '/phone', page: () => const PhoneLoginScreen()),
+        GetPage(name: '/signup', page: () => const SignUpScreen()),
       ],
     );
   }
