@@ -35,7 +35,10 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Add your login validation/authentication logic here
+                  // On success, navigate to home
+                  Get.offAllNamed('/home');},
                 child: const Text('Login'),
               ),
               const SizedBox(height: 16),

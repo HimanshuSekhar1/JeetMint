@@ -137,7 +137,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Align(
               alignment: Alignment.bottomRight,
               child: ElevatedButton(
-                onPressed: nextStep,
+                onPressed: () {
+                  if (_currentStep < 1) {
+                    nextStep();
+                  } else {
+                    // Add actual sign-up logic here
+                    // After successful signup
+                    Get.offAllNamed('/home');
+                  }
+                },
                 child: Text(_currentStep < 1 ? "Next" : "Signup"),
               ),
             ),
