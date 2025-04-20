@@ -17,6 +17,16 @@ class JeetMintApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        title: 'JeetMint',
+          theme: ThemeData(
+            fontFamily: 'Inter',
+            primarySwatch: Colors.deepPurple,
+            scaffoldBackgroundColor: const Color(0xFF8C8AFA),
+            textTheme: ThemeData.light().textTheme.apply(
+              bodyColor: Colors.black,
+              displayColor: Colors.black,
+        ),
+  ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
       getPages: [
