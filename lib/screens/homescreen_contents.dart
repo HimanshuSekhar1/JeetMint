@@ -32,7 +32,7 @@ class HomeScreenContents extends StatelessWidget {
 
           // Horizontal Game Tile List
           SizedBox(
-            height: 220,
+            height: 250,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 5, // example number of games
@@ -73,16 +73,17 @@ class HomeScreenContents extends StatelessWidget {
       required String description,
       required String imageUrl,
       required int activeUsers}) {
-    return Container(
+    var container = Container(
       margin: const EdgeInsets.only(right: 12),
       width: 210,
-
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: const Color(0xFF01011F),
         border: Border.all(color: Colors.white30),
       ),
+
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.only(
@@ -146,18 +147,18 @@ class HomeScreenContents extends StatelessWidget {
           ),
           
           
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6),
+            padding: const EdgeInsets.only(left: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   gameName,
                   style: const TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
                     fontFamily: 'Inter',
-                    fontSize: 14,
+                    fontSize: 20,
                     color: Colors.white,
                   ),
                 ),
@@ -178,6 +179,7 @@ class HomeScreenContents extends StatelessWidget {
         ],
       ),
     );
+    return container;
   }
 }
 
