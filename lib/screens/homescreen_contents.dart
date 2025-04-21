@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 
 class HomeScreenContents extends StatelessWidget {
-  const HomeScreenContents({super.key, required this.username});
-  final String username;
+  const HomeScreenContents({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "👋 Welcome, Amit",
+            "👋 Welcome, Himanshu",
             style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
               fontFamily: 'Inter',
-              color: Colors.black,
             ),
           ),
           const SizedBox(height: 20),
 
           const Text(
-            "Available Games",
+            "Best Games In One Place",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 42,
               fontWeight: FontWeight.bold,
               fontFamily: 'Inter',
-              color: Colors.black,
             ),
           ),
           const SizedBox(height: 10),
@@ -45,7 +41,7 @@ class HomeScreenContents extends StatelessWidget {
                   context,
                   gameName: "Sudoku",
                   description: "Classic logic puzzle",
-                  imageUrl: "https://via.placeholder.com/150x100", // Replace with actual asset or network image
+                  imageUrl: "https://merideewar.com/cdn/shop/products/27_f8af5a8e-59aa-4314-82ff-06029aec418b.png?v=1649319451",
                   activeUsers: 123,
                 );
               },
@@ -56,10 +52,9 @@ class HomeScreenContents extends StatelessWidget {
           const Text(
             "Previously Played",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
               fontFamily: 'Inter',
-              color: Colors.black,
             ),
           ),
           const SizedBox(height: 10),
@@ -67,7 +62,6 @@ class HomeScreenContents extends StatelessWidget {
           // Placeholder for previous games
           const Text(
             "No games played yet.",
-            style: TextStyle(color: Colors.white70),
           ),
         ],
       ),
@@ -81,58 +75,77 @@ class HomeScreenContents extends StatelessWidget {
       required int activeUsers}) {
     return Container(
       margin: const EdgeInsets.only(right: 12),
-      width: 160,
+      width: 210,
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
+        color: const Color(0xFF01011F),
         border: Border.all(color: Colors.white30),
       ),
       child: Column(
         children: [
-          // Game Image with custom shape
-          ClipPath(
-            clipper: _PointedBottomClipper(),
-            child: Container(
-              height: 130,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+            bottomLeft: Radius.circular(16),
+            bottomRight: Radius.circular(16)
+          ),
+          child: ClipPath(
+              clipper: RoundedBottomEdgeClipper(radius: 16),
+              child: Container(
+                height: 130,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(imageUrl),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  // Eye with superscript
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: Colors.white70,
-                        borderRadius: BorderRadius.circular(12),
+                child: Stack(
+                  children: [
+                    // Eye with superscript
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF01011F),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text("👀 $activeUsers",
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
                       ),
-                      child: Text("👁️ $activeUsers",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          )),
                     ),
-                  ),
-                  // Heart icon
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: IconButton(
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3477411445.
-                      onPressed: () {},
-                      icon: const Icon(LineIcons.fire, size: 18, )),
-                  ),
-                ],
+                    // Heart icon
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: Container(
+                        width: 28,
+                        height: 28,
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF01011F),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Center(
+                          child: LikeHeart(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
+          
+          
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -145,7 +158,7 @@ class HomeScreenContents extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Inter',
                     fontSize: 14,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -153,7 +166,7 @@ class HomeScreenContents extends StatelessWidget {
                   description,
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontFamily: 'Inter',
                   ),
                   maxLines: 2,
@@ -168,19 +181,68 @@ class HomeScreenContents extends StatelessWidget {
   }
 }
 
-// For pointed bottom image clip
-class _PointedBottomClipper extends CustomClipper<Path> {
+// For rounded bottom image clip
+class RoundedBottomEdgeClipper extends CustomClipper<Path> {
+  final double radius;
+
+  RoundedBottomEdgeClipper({this.radius = 16.0});
+
   @override
   Path getClip(Size size) {
-    final path = Path()
-      ..lineTo(0, size.height - 10)
-      ..lineTo(size.width / 2, size.height)
-      ..lineTo(size.width, size.height - 10)
-      ..lineTo(size.width, 0)
-      ..close();
+    final path = Path();
+    path.lineTo(0, size.height - radius);
+
+    // Bottom left rounded corner
+    path.quadraticBezierTo(
+      0,
+      size.height,
+      radius,
+      size.height,
+    );
+
+    // Line to bottom right with rounded corner
+    path.lineTo(size.width - radius, size.height);
+    path.quadraticBezierTo(
+      size.width,
+      size.height,
+      size.width,
+      size.height - radius,
+    );
+
+    path.lineTo(size.width, 0);
+    path.close();
+
     return path;
   }
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+// For heart icon
+class LikeHeart extends StatefulWidget {
+  const LikeHeart({super.key});
+
+  @override
+  State<LikeHeart> createState() => _LikeHeartState();
+}
+
+class _LikeHeartState extends State<LikeHeart> {
+  bool isLiked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isLiked = !isLiked;
+        });
+      },
+      child: Icon(
+        Icons.favorite,
+        color: isLiked ? Colors.red : Colors.white,
+        size: 15,
+      ),
+    );
+  }
 }
