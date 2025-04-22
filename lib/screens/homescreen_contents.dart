@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'game_detail_screen.dart';
+import 'game_model.dart';
+import 'package:get/get.dart';
 
 class HomeScreenContents extends StatelessWidget {
   const HomeScreenContents({super.key});
@@ -11,7 +14,7 @@ class HomeScreenContents extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "👋 Welcome, Himanshu",
+            "👋    Welcome, Himanshu",
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -41,7 +44,8 @@ class HomeScreenContents extends StatelessWidget {
                   context,
                   gameName: "Sudoku",
                   description: "Classic logic puzzle",
-                  imageUrl: "https://merideewar.com/cdn/shop/products/27_f8af5a8e-59aa-4314-82ff-06029aec418b.png?v=1649319451",
+                  imageUrl:
+                      "https://merideewar.com/cdn/shop/products/27_f8af5a8e-59aa-4314-82ff-06029aec418b.png?v=1649319451",
                   activeUsers: 123,
                 );
               },
@@ -60,126 +64,146 @@ class HomeScreenContents extends StatelessWidget {
           const SizedBox(height: 10),
 
           // Placeholder for previous games
-          const Text(
-            "No games played yet.",
-          ),
+          const Text("No games played yet."),
         ],
       ),
     );
   }
 
-  Widget _buildGameTile(BuildContext context,
-      {required String gameName,
-      required String description,
-      required String imageUrl,
-      required int activeUsers}) {
-    var container = Container(
-      margin: const EdgeInsets.only(right: 12),
-      width: 210,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: const Color(0xFF01011F),
-        border: Border.all(color: Colors.white30),
-      ),
-
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-            bottomLeft: Radius.circular(16),
-            bottomRight: Radius.circular(16)
+  Widget _buildGameTile(
+    BuildContext context, {
+    required String gameName,
+    required String description,
+    required String imageUrl,
+    required int activeUsers,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        Get.to(
+          () => GameDetailScreen(
+            game: GameModel(
+              name: gameName,
+              activeUsers: activeUsers,
+              category: "Puzzle", // or pass dynamically
+              rules: "Game rules go here...",
+              howToPlay: "How to play info goes here...",
+              videoUrl: imageUrl, // Replace with actual gif/video url
+            ),
           ),
-          child: ClipPath(
-              clipper: RoundedBottomEdgeClipper(radius: 16),
-              child: Container(
-                height: 130,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(imageUrl),
-                    fit: BoxFit.cover,
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(right: 12),
+        width: 210,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: const Color(0xFF01011F),
+          border: Border.all(color: Colors.white30),
+        ),
+
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+                bottomLeft: Radius.circular(16),
+                bottomRight: Radius.circular(16),
+              ),
+              child: ClipPath(
+                clipper: RoundedBottomEdgeClipper(radius: 16),
+                child: Container(
+                  height: 130,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(imageUrl),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                child: Stack(
-                  children: [
-                    // Eye with superscript
-                    Positioned(
-                      top: 8,
-                      left: 8,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF01011F),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text("👀 $activeUsers",
+                  child: Stack(
+                    children: [
+                      // Eye with superscript
+                      Positioned(
+                        top: 8,
+                        left: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF01011F),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            "👀 $activeUsers",
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                            )),
-                      ),
-                    ),
-                    // Heart icon
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        width: 28,
-                        height: 28,
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF01011F),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Center(
-                          child: LikeHeart(),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      // Heart icon
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          width: 28,
+                          height: 28,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF01011F),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Center(child: LikeHeart()),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          
-          
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  gameName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Inter',
-                    fontSize: 20,
-                    color: Colors.white,
+
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    gameName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Inter',
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontFamily: 'Inter',
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                      fontFamily: 'Inter',
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                )
-              ],
+                ],
+              ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
-    return container;
   }
 }
 
@@ -195,12 +219,7 @@ class RoundedBottomEdgeClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height - radius);
 
     // Bottom left rounded corner
-    path.quadraticBezierTo(
-      0,
-      size.height,
-      radius,
-      size.height,
-    );
+    path.quadraticBezierTo(0, size.height, radius, size.height);
 
     // Line to bottom right with rounded corner
     path.lineTo(size.width - radius, size.height);
