@@ -46,6 +46,18 @@ class _GameDetailScreenState extends State<GameDetailScreen> {
                   fontFamily: 'Inter',
                 ),
               ),
+
+              const SizedBox(height: 20),
+
+              const Text(
+                'widget.game.name',
+                style: TextStyle(
+                  fontSize: 42,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Inter',
+                ),
+              ),
+
               Text("🔥 ${widget.game.activeUsers} players", style: const TextStyle(color: Colors.white)),
               const SizedBox(height: 8),
               const LikeHeart(), // Reusable

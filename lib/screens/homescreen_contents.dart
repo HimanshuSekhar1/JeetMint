@@ -24,7 +24,7 @@ class HomeScreenContents extends StatelessWidget {
           const SizedBox(height: 20),
 
           const Text(
-            "Best Games In One Place",
+            "Winning at One Place",
             style: TextStyle(
               fontSize: 42,
               fontWeight: FontWeight.bold,
