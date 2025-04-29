@@ -7,13 +7,13 @@ import 'screens/login_screen.dart';
 import 'screens/phone_login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/home_screen.dart';
-void main() {
-  runApp(const JeetMintApp());
+void main() {  
+  runApp(const KarodsApp());
 }
 
-class JeetMintApp extends StatelessWidget {
-  const JeetMintApp({super.key});
-
+class KarodsApp extends StatelessWidget {
+  const KarodsApp({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

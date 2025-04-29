@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'game_model.dart';
 import 'homescreen_contents.dart';
-import 'package:myapp/widgets/custom_appbar.dart';
+import 'package:karods/widgets/custom_appbar.dart';
 
 class GameDetailScreen extends StatefulWidget {
   final GameModel game;

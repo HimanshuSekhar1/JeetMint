@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:line_icons/line_icons.dart';
 import 'homescreen_contents.dart';
-import 'package:myapp/widgets/custom_appbar.dart';
+import 'package:karods/widgets/custom_appbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
