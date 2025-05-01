@@ -25,18 +25,18 @@ class KarodsApp extends StatelessWidget {
             textTheme: ThemeData.light().textTheme.apply(
               bodyColor: Colors.black,
               displayColor: Colors.black,
-        ),
-  ),
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/splash',
-      getPages: [
-        GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(name: '/intro', page: () => const IntroScreen()),
-        GetPage(name: '/login', page: () => const LoginScreen()),
-        GetPage(name: '/phone', page: () => const PhoneLoginScreen()),
-        GetPage(name: '/signup', page: () => const SignUpScreen()),
-        GetPage(name: '/home', page: () => const HomeScreen()),
-      ],
+            ),
+          ),
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/splash',
+          getPages: [
+            GetPage(name: '/splash', page: () => const SplashScreen()),
+            GetPage(name: '/intro', page: () => const IntroScreen()),
+            GetPage(name: '/login', page: () => const LoginScreen()),
+            GetPage(name: '/phone', page: () => const PhoneLoginScreen()),
+            GetPage(name: '/signup', page: () => const SignUpScreen()),
+            GetPage(name: '/home', page: () => const HomeScreen()),
+          ],
     );
   }
 }

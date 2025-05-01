@@ -79,10 +79,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
             );
-            if (pickedDate != null) {
-              dobController.text = "${pickedDate.toLocal()}".split(' ')[0];
-            }
-                    },
+            dobController.text = "${pickedDate?.toLocal()}".split(' ')[0];
+                              },
         ),
         DropdownButtonFormField<String>(
           value: selectedGender,
